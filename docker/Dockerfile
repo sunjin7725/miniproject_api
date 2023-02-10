@@ -2,6 +2,7 @@ FROM alpine
 
 RUN apk update && apk upgrade
 RUN apk -e search git && apk search git && apk add git
+RUN mkdir -p /opt/conda
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/sh ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh && \
