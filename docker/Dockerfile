@@ -11,6 +11,10 @@ RUN mkdir -p /app
 RUN git clone https://github.com/sunjin7725/miniproject_api \
     /app/miniproject_api
 
+RUN mkdir -p /app/miniproject_api/data/model/kogpt2-base-v2
+RUN git clone https://huggingface.co/skt/kogpt2-base-v2 \
+    /app/miniproject_api/data/model/kogpt2-base-v2
+
 WORKDIR /app/miniproject_api
 RUN pip install -r requirements.txt
 CMD ["python", "app/app.py"]
