@@ -33,20 +33,22 @@ def get_hwp(hwp_path, keyword=None):
                     result.append(line)
             return result
     except:
-        process = Popen(['hwp5txt', hwp_path], stdout=PIPE, stderr=PIPE)
-        stdout, stderr = process.communicate()
-        data = stdout.decode('utf-8')
-        if len(data) < 100:
-            return stderr
+        if os.name == 'nt':
+            process = Popen(['hwp5txt', hwp_path], stdout=PIPE, stderr=PIPE)
+            stdout, stderr = process.communicate()
+            data = stdout.decode('utf-8')
+            if len(data) < 100:
+                return stderr
 
-        if keyword is None:
-            return data
+            if keyword is None:
+                return data
+            else:
+                for line in data.split("\n"):
+                    if keyword in line:
+                        result.append(line)
+                return result
         else:
-            for line in data.split("\n"):
-                if keyword in line:
-                    result.append(line)
-            return result
-
+            raise BaseException("한글파일 텍스트 추출 실패")
 
 def get_hwpx(hwpx_path):
     hwpx_file = hwpx_path
