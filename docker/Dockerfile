@@ -13,4 +13,4 @@ RUN git clone https://github.com/sunjin7725/miniproject_api \
 
 WORKDIR /app/miniproject_api
 RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+CMD ["python", "app/app.py"]
