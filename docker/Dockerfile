@@ -1,6 +1,8 @@
 FROM continuumio/anaconda3:2020.02-alpine
 
 USER root
+EXPOSE 3000
+ENV /opt/conda/bin
 
 RUN apk update && apk upgrade
 RUN apk -e search git && apk search git && apk add git
