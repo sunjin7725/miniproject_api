@@ -1,6 +1,5 @@
 FROM continuumio/anaconda3:2020.02-alpine
 
-RUN apk update && apk upgrade
 RUN apk -e search git && apk search git && apk add git
 
 RUN mkdir -p /app
