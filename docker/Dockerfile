@@ -10,4 +10,4 @@ RUN mkdir -p /app
 RUN git clone https://github.com/sunjin7725/miniproject_api \
     /app/miniproject_api
 
-CMD ["python", "/app/miniproject_api/app.py"]
+CMD ["python", "/app/miniproject_api/app/app.py"]
