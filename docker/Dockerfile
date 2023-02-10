@@ -6,8 +6,12 @@ ENV PATH=/opt/conda/bin:$PATH
 
 RUN apk update && apk upgrade
 RUN apk -e search git && apk search git && apk add git
+
+RUN conda create -n bigdata python==3.7.6 && conda activate bigdata
 RUN mkdir -p /app
 RUN git clone https://github.com/sunjin7725/miniproject_api \
     /app/miniproject_api
 
-CMD ["python", "/app/miniproject_api/app/app.py"]
+WORKDIR /app/miniproject_api
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]
