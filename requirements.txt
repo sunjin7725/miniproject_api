@@ -1,0 +1,7 @@
+uvicorn
+fastapi
+opencv-python-headless<4.3
+easyocr
+python-multipart
+olefile
+aiofiles
