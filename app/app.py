@@ -2,13 +2,14 @@ import uvicorn
 
 from fastapi import FastAPI
 
-from api.resources.v1.routers import ocr, get_hwp
+from api.resources.v1.routers import ocr, get_hwp, kogpt2
 
 
 def create_app():
     app = FastAPI()
     app.include_router(ocr.router)
     app.include_router(get_hwp.router)
+    app.include_router(kogpt2.router)
     return app
 
 
