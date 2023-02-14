@@ -5,5 +5,4 @@ easyocr
 python-multipart
 olefile
 aiofiles
-torch
 transformers
