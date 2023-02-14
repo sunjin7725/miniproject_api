@@ -6,6 +6,7 @@ ENV PATH=/opt/conda/bin:$PATH
 
 RUN apk update && apk upgrade
 RUN apk -e search git && apk search git && apk add git
+RUN git lfs install
 
 RUN mkdir -p /app
 RUN git clone https://github.com/sunjin7725/miniproject_api \
