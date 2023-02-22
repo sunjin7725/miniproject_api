@@ -17,33 +17,33 @@ pipeline {
             docker_image.push()
         }
     }
-
-
-    stages {
-        stage('Init') {
-            docker.withRegistry("${private_registry}") {
-                echo "${PWD}"
-                docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
-                docker_image.push()
-            }
-        }
-
-        stage('Bulid Docker') {
-            steps{
-                script {
-                    docker_image = docker.build("${image_name}:latest", "--no-cache ./deploy/docker")
-                }
-                echo "docker build completed!!!"
-            }
-        }
-
-        stage('Push Docker'){
-            steps {
-                script {
-                    docker_image.push()
-                }
-                echo "docker image push completed"
-            }
-        }
-    }
+//
+//
+//     stages {
+//         stage('Init') {
+//             docker.withRegistry("${private_registry}") {
+//                 echo "${PWD}"
+//                 docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
+//                 docker_image.push()
+//             }
+//         }
+//
+//         stage('Bulid Docker') {
+//             steps{
+//                 script {
+//                     docker_image = docker.build("${image_name}:latest", "--no-cache ./deploy/docker")
+//                 }
+//                 echo "docker build completed!!!"
+//             }
+//         }
+//
+//         stage('Push Docker'){
+//             steps {
+//                 script {
+//                     docker_image.push()
+//                 }
+//                 echo "docker image push completed"
+//             }
+//         }
+//     }
 }
