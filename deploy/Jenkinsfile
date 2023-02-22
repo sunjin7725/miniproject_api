@@ -14,7 +14,7 @@ pipeline {
           steps {
             echo 'Bulid Docker'
             script {
-                docker_image = docker.build("${imagename}:latest", "--no-cache deploy/docker/.")
+                docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker/.")
             }
           }
           post {
