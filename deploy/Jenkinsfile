@@ -7,9 +7,16 @@ pipeline {
         reg_cred = "harbor_cred"
     }
 
-    docker.withRegistry(private_registry, reg_cred)
+
     stages {
-        // docker build
+        stage('Init') {
+            steps {
+                script {
+                    docker.withRegistry(private_registry, reg_cred)
+                }
+            }
+        }
+
         stage('Bulid Docker') {
             steps{
                 script {
