@@ -12,7 +12,9 @@ pipeline {
     stages {
         stage('Init') {
             steps{
-                node('label') { workspace = pwd() }
+                node('label') {
+                    def workspace = pwd()
+                }
                 script {
                     docker.withRegistry("${private_registry}") {
                         docker_image = docker.build("${image_name}:latest", "--no-cache ${workspace}/deploy/docker")
