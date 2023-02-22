@@ -9,37 +9,11 @@ pipeline {
 
     stages {
         // docker build
-        stage('Bulid Docker') {
-          agent any
-          steps {
-            echo 'Bulid Docker'
-            script {
-                docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker/.")
-            }
-          }
-          post {
-            failure {
-              error 'This pipeline stops here...'
-            }
-          }
-        }
-
-        // docker Deploy
-        stage('Push Docker Image') {
-          agent any
-          steps {
-            script {
-              echo "Push Docker Image..."
-              docker.withRegistry(private_registry, reg_cred) {
-                dockerImage.push(docker_image)
-              }
-            }
-          }
-          post {
-            failure {
-              error 'This pipeline stops here...'
-            }
-          }
+        stage('Bulid & Push Docker') {
+            docker.withRegistry(private_registry, reg_cred) {
+                def docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
+                echo "docker build completed!!!"
+                docker_image.push()
         }
     }
 }
