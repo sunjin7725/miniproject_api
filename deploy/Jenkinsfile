@@ -11,7 +11,9 @@ pipeline {
     stages {
         stage('Init') {
             steps {
-                docker.withRegistry("${private_registry}", "${reg_cred}")
+                script {
+                    docker.withRegistry("${private_registry}", "${reg_cred}")
+                }
             }
         }
 
