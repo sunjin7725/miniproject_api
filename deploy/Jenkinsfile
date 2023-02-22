@@ -7,15 +7,24 @@ pipeline {
         reg_cred = "harbor_cred"
     }
 
+    docker.withRegistry(private_registry, reg_cred)
     stages {
         // docker build
-        stage('Bulid & Push Docker') {
-            script {
-                docker.withRegistry(private_registry, reg_cred) {
-                    def docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
-                    echo "docker build completed!!!"
+        stage('Bulid Docker') {
+            steps{
+                script {
+                    docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
+                }
+                echo "docker build completed!!!"
+            }
+        }
+
+        stage('Push Docker'){
+            steps {
+                script {
                     docker_image.push()
                 }
+                echo "docker image push completed"
             }
         }
     }
