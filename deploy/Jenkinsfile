@@ -13,7 +13,7 @@ pipeline {
         stage('Init') {
             steps{
                 node('label') {
-                    def workspace = pwd()
+                    workspace = WORKSPACE
                 }
                 script {
                     docker.withRegistry("${private_registry}") {
