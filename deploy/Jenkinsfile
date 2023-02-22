@@ -11,11 +11,13 @@ pipeline {
 
     stages {
         stage('Init') {
-            node('label') {
-                docker.withRegistry("${private_registry}") {
-                    echo "${PWD}"
-                    docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
-                    docker_image.push()
+            steps{
+                node('label') {
+                    docker.withRegistry("${private_registry}") {
+                        echo "${PWD}"
+                        docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
+                        docker_image.push()
+                    }
                 }
             }
         }
