@@ -12,7 +12,10 @@ pipeline {
         stage('Init') {
             steps {
                 script {
-                    docker.withRegistry("${private_registry}", "${reg_cred}")
+                    docker.withRegistry("${private_registry}", "${reg_cred}") {
+                        docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
+                        docker_image.push()
+                    }
                 }
             }
         }
