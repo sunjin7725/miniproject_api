@@ -6,15 +6,13 @@ pipeline {
         private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
         image_name = "bigdata_miniproject_api"
         reg_cred = "harbor_cred"
+        workspace = PWD
     }
 
 
     stages {
         stage('Init') {
             steps{
-                node('label') {
-                    workspace = WORKSPACE
-                }
                 script {
                     docker.withRegistry("${private_registry}") {
                         docker_image = docker.build("${image_name}:latest", "--no-cache ${workspace}/deploy/docker")
