@@ -28,9 +28,13 @@ pipeline {
         stage('Push Docker Image') {
           agent any
           steps {
-            docker.withRegistry(private_registry, reg_cred) {
+            script {
+              echo "Push Docker Image..."
+              docker.withRegistry(private_registry, reg_cred) {
                 dockerImage.push(docker_image)
+              }
             }
+          }
           post {
             failure {
               error 'This pipeline stops here...'
