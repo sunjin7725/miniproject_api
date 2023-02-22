@@ -6,13 +6,13 @@ pipeline {
         private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
         image_name = "bigdata_miniproject_api"
         reg_cred = "harbor_cred"
+        workspace = "{pwd}"
     }
 
 
     stages {
         stage('Init') {
             steps{
-                workspace = pwd
                 script {
                     echo "${workspace}"
                     docker.withRegistry("${private_registry}") {
