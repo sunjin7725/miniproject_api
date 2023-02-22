@@ -14,6 +14,7 @@ pipeline {
                 def docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
                 echo "docker build completed!!!"
                 docker_image.push()
+            }
         }
     }
 }
