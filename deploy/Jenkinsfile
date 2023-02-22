@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
+        image_name = "bigdata_miniproject_api"
+        reg_cred = "harbor_cred"
+    }
+
+    stages {
+        // docker build
+        stage('Bulid Docker') {
+          agent any
+          steps {
+            echo 'Bulid Docker'
+            script {
+                docker_image = docker.build("${imagename}:latest", "--no-cache deploy/docker/.")
+            }
+          }
+          post {
+            failure {
+              error 'This pipeline stops here...'
+            }
+          }
+        }
+
+        // docker Deploy
+        stage('Push Docker Image') {
+          agent any
+          steps {
+            docker.withRegistry(private_registry, reg_cred) {
+                dockerImage.push(docker_image)
+            }
+          post {
+            failure {
+              error 'This pipeline stops here...'
+            }
+          }
+        }
+    }
+}
