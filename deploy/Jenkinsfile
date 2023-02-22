@@ -10,6 +10,7 @@ pipeline {
 
     stages {
         stage('Init') {
+            agent any
             steps {
                 script {
                     docker.withRegistry(private_registry, reg_cred)
@@ -18,6 +19,7 @@ pipeline {
         }
 
         stage('Bulid Docker') {
+            agent any
             steps{
                 script {
                     docker_image = docker.build("${image_name}:latest", "--no-cache deploy/docker")
@@ -27,6 +29,7 @@ pipeline {
         }
 
         stage('Push Docker'){
+            agent any
             steps {
                 script {
                     docker_image.push()
