@@ -8,25 +8,17 @@ pipeline {
         reg_cred = "harbor_cred"
     }
 
-    node {
-        checkout scm
 
-        docker.withRegistry("${private_registry}") {
-            echo "${PWD}"
-            docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
-            docker_image.push()
+    stages {
+        stage('Init') {
+            node('label') {
+                docker.withRegistry("${private_registry}") {
+                    echo "${PWD}"
+                    docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
+                    docker_image.push()
+                }
+            }
         }
-    }
-//
-//
-//     stages {
-//         stage('Init') {
-//             docker.withRegistry("${private_registry}") {
-//                 echo "${PWD}"
-//                 docker_image = docker.build("${image_name}:latest", "--no-cache ../deploy/docker")
-//                 docker_image.push()
-//             }
-//         }
 //
 //         stage('Bulid Docker') {
 //             steps{
@@ -45,5 +37,5 @@ pipeline {
 //                 echo "docker image push completed"
 //             }
 //         }
-//     }
+    }
 }
