@@ -9,8 +9,16 @@ pipeline {
         workspace = "${pwd}"
     }
 
-
     stages {
+        stage('Test') {
+            steps {
+                agent {
+                    dockerfile {
+                        echo '$workspace'
+                    }
+                }
+            }
+        }
         stage('Init') {
             steps{
                 script {
