@@ -1,10 +1,14 @@
 pipeline {
     agent any
+    tools {
+      'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+    }
+
     environment {
         home_dir = '/var/jenkins_home/workspace/bigdata_miniproject_api'
         private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
         image_name = "bigdata_miniproject_api"
-        reg_cred = "harbor_cred"
+        reg_cred = "harbor-cred"
 //         workspace = "${pwd}"
     }
 
@@ -13,7 +17,7 @@ pipeline {
             steps{
                 script {
                     sh "docker version"
-                    docker.withRegistry("${private_registry}") {
+                    docker.withRegistry(private_registry, reg_cred) {
                         docker_image = docker.build("${image_name}:latest", "--no-cache ${workspace}/deploy/docker")
                         docker_image.push()
                     }
