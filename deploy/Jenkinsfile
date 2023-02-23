@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
+        private_registry = "https://harbor.kcnet.bigdata.com:30443/bigdata"
         image_name = "bigdata_miniproject_api"
         reg_cred = "harbor-cred"
     }
