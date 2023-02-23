@@ -6,7 +6,7 @@ pipeline {
         private_registry = "harbor.kcnet.bigdata.com:30443/bigdata"
         image_name = "bigdata_miniproject_api"
         reg_cred = "harbor_cred"
-        workspace = "${pwd}"
+//         workspace = "${pwd}"
     }
 
     stages {
