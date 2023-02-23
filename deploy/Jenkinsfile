@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+    }
 
     environment {
         home_dir = '/var/jenkins_home/workspace/bigdata_miniproject_api'
@@ -10,15 +13,6 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            steps {
-                agent {
-                    dockerfile {
-                        echo '$workspace'
-                    }
-                }
-            }
-        }
         stage('Init') {
             steps{
                 script {
