@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bigdata_miniproject_api_svc
+  name: bigdata-miniproject-api-svc
   namespace: bigdata-team
 spec:
   selector:
-    app: bigdata_miniproject_api
+    app: bigdata-miniproject-api
   ports:
   - protocol: TCP
     port: 80
