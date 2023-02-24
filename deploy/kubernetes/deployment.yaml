@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bigdata_miniproject_api_deploy
-  namespace: bigdata_team
+  namespace: bigdata-team
 spec:
   replicas: 2
   selector:
