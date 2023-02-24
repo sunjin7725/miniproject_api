@@ -6,20 +6,19 @@ pipeline {
         private_registry = "https://harbor.kcnet.bigdata.com:30443"
         image_name = "bigdata_miniproject_api"
         reg_cred = "harbor-cred"
-//         workspace = "/var/jenkins_home/workspace/${pipeline_name}"
     }
 
     stages {
-//         stage('Build & Push Docker image') {
-//             steps{
-//                 script {
-//                     docker.withRegistry(private_registry, reg_cred) {
-//                         docker_image = docker.build("bigdata/${image_name}:latest", "--no-cache ${workspace}/deploy/docker")
-//                         docker_image.push()
-//                     }
-//                 }
-//             }
-//         }
+        stage('Build & Push Docker image') {
+            steps{
+                script {
+                    docker.withRegistry(private_registry, reg_cred) {
+                        docker_image = docker.build("bigdata/${image_name}:latest", "--no-cache ${workspace}/deploy/docker")
+                        docker_image.push()
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 script {
