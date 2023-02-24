@@ -22,17 +22,16 @@ pipeline {
 //         }
         stage('Deploy') {
             steps {
-                echo "${workspace}"
                 script {
                     echo "${workspace}"
-                    echo 'Deploy deployment.yaml'
-                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/deployment.yaml'
+                    echo "Deploy deployment.yaml"
+                    sh "kubectl apply -f ${workspace}/deploy/kubernetes/deployment.yaml"
 
-                    echo 'Deploy service.yaml'
-                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/service.yaml'
+                    echo "Deploy service.yaml"
+                    sh "kubectl apply -f ${workspace}/deploy/kubernetes/service.yaml"
 
-                    echo 'Deploy ingress.yaml'
-                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/ingress.yaml'
+                    echo "Deploy ingress.yaml"
+                    sh "kubectl apply -f ${workspace}/deploy/kubernetes/ingress.yaml"
                 }
             }
         }
