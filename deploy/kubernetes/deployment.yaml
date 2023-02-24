@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bigdata_miniproject_api_deploy
+  namespace: bigdata_team
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bigdata_miniproject_api
+  template:
+    metadata:
+      labels:
+        app: bigdata_miniproject_api
+    spec:
+      containers:
+        - name: bigdata_miniproject_api
+          image: harbor.kcnet.bigdata.com:30443/bigdata/bigdata_miniproject_api:latest
+          imagePullPolicy: Always
+          imagePullSecrets:
+            - name: harbor-registry
+          ports:
+          - containerPort: 3000

@@ -19,23 +19,19 @@ pipeline {
                 }
             }
         }
-//
-//         stage('Bulid Docker') {
-//             steps{
-//                 script {
-//                     docker_image = docker.build("${image_name}:latest", "--no-cache ./deploy/docker")
-//                 }
-//                 echo "docker build completed!!!"
-//             }
-//         }
-//
-//         stage('Push Docker'){
-//             steps {
-//                 script {
-//                     docker_image.push()
-//                 }
-//                 echo "docker image push completed"
-//             }
-//         }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo 'Deploy deployment.yaml'
+                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/deployment.yaml'
+
+                    echo 'Deploy service.yaml'
+                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/service.yaml'
+
+                    echo 'Deploy ingress.yaml'
+                    sh 'kubectl apply -f ${workspace}/deploy/kubernetes/ingress.yaml'
+                }
+            }
+        }
     }
 }
