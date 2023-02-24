@@ -24,6 +24,7 @@ pipeline {
             steps {
                 echo "${workspace}"
                 script {
+                    echo "${workspace}"
                     echo 'Deploy deployment.yaml'
                     sh 'kubectl apply -f ${workspace}/deploy/kubernetes/deployment.yaml'
 
