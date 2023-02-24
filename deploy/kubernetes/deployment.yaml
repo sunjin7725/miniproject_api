@@ -17,7 +17,7 @@ spec:
         - name: bigdata_miniproject_api
           image: harbor.kcnet.bigdata.com:30443/bigdata/bigdata_miniproject_api:latest
           imagePullPolicy: Always
-          imagePullSecrets:
-            - name: harbor-registry
           ports:
           - containerPort: 3000
+      imagePullSecrets:
+        - name: harbor-registry
