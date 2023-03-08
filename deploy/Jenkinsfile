@@ -5,7 +5,7 @@ pipeline {
         pipeline_name = 'bigdata_miniproject_api'
         private_registry = "https://harbor.kcnet.bigdata.com:30443"
         image_name = "bigdata_miniproject_api"
-        reg_cred = "harbor-cred"
+        reg_cred = "regcred"
     }
 
     stages {
